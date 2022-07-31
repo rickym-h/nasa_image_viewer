@@ -14,21 +14,14 @@ const config = {
     new HtmlWebpackPlugin({
       template: "src/index.html",
       filename: 'index.html',
-    })
+    }),
   ],
   module: {
     rules: [
       {
-        test: /\.png$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              mimetype: 'image/png'
-            }
-          }
-        ]
-      }
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
     ]
   }
 };

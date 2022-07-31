@@ -1,17 +1,25 @@
+import "./style.css"
+
 async function getNasaImageData(date) {
-    let dateQuery;
-    if (date) {
-        dateQuery = `&date=${date}`;
-    } else {
-        dateQuery = "";
+    try{
+        let dateQuery;
+        if (date) {
+            dateQuery = `&date=${date}`;
+        } else {
+            dateQuery = "";
+        }
+        const API_KEY = "bNOERaLKgs5hRGbEuvLYSBIoNzejhhhLf03RZAAe";
+        let url = `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}${dateQuery}`
+        const returnedData = await fetch(url, {cors: true});
+        console.log(returnedData)
+        const jsonData = await returnedData.json();
+        console.log(jsonData)
+        loadDataToDOM(jsonData)
+        console.log("DONE")
+    } catch (error) {
+        console.log(error)
     }
-    const API_KEY = "bNOERaLKgs5hRGbEuvLYSBIoNzejhhhLf03RZAAe";
-    let url = `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}${dateQuery}`
-    const returnedData = await fetch(url, {cors: true});
-    const jsonData = await returnedData.json();
-    console.log(jsonData)
-    loadDataToDOM(jsonData)
-    console.log("DONE")
+
 }
 
 function loadDataToDOM(data) {

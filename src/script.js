@@ -15,7 +15,6 @@ async function getNasaImageData(date) {
         const jsonData = await returnedData.json();
         console.log(jsonData)
         loadDataToDOM(jsonData)
-        console.log("DONE")
     } catch (error) {
         console.log(error)
     }
@@ -23,10 +22,31 @@ async function getNasaImageData(date) {
 }
 
 function loadDataToDOM(data) {
+    console.log("url: " + data.url);
+    console.log("hdurl: " + data.hdurl);
     document.getElementById("title").textContent = data.title;
     document.getElementById("mainImg").src = data.url;
     document.getElementById("description").textContent = data.explanation;
     document.getElementById("copyright").textContent = data.copyright;
+
+    // load modal image
+    let modal = document.getElementById("myModal");
+    let mainImg = document.getElementById("mainImg");
+    let modalImg = document.getElementById("modalImg");
+    document.getElementById("modalImg").src = data.hdurl;
+    mainImg.onclick = function(){
+        modal.style.display = "block";
+        modalImg.src = data.hdurl;
+        document.getElementById("caption").textContent = data.title;
+    }
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+// When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
 }
 
 getNasaImageData()
+

@@ -27,7 +27,7 @@ function loadDataToDOM(data) {
     document.getElementById("title").textContent = data.title;
     document.getElementById("mainImg").src = data.url;
     document.getElementById("description").textContent = data.explanation;
-    document.getElementById("copyright").textContent = data.copyright;
+    document.getElementById("copyright").textContent = "Copyright: " + data.copyright;
 
     // load modal image
     let modal = document.getElementById("myModal");
